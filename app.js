@@ -20,11 +20,11 @@ export function createApplication() {
  app.use(express.static(join(__dirname, "Pages")));
 
   app.get("/login", (req, res) => {
-    res.sendFile(join(__dirname, "Pages", "login.html"));
+    res.sendFile(join(__dirname, "Pages", "Login.html"));
   });
 
   app.get("/signup", (req, res) => {
-    res.sendFile(join(__dirname, "Pages", "signup.html"));
+    res.sendFile(join(__dirname, "Pages", "Signup.html"));
   });
 
   app.get("/forgot-password", (req, res) => {
