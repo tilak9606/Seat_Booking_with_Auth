@@ -17,26 +17,26 @@ export function createApplication() {
   app.use("/seats", seatsRouter);
   app.use("/auth", authRouter);
 
-  app.use(express.static(join(__dirname, ".")));
+ app.use(express.static(join(__dirname, "Pages")));
 
-  app.get("/login.html", (req, res) => {
-    res.sendFile(join(__dirname, "./Pages/login.html"));
+  app.get("/login", (req, res) => {
+    res.sendFile(join(__dirname, "Pages", "login.html"));
   });
 
-  app.get("/signup.html", (req, res) => {
-    res.sendFile(join(__dirname, "./Pages/signup.html"));
+  app.get("/signup", (req, res) => {
+    res.sendFile(join(__dirname, "Pages", "signup.html"));
   });
 
   app.get("/forgot-password", (req, res) => {
-    res.sendFile(path.join(__dirname, "./Pages/forgot-password.html"));
+    res.sendFile(join(__dirname, "Pages", "forgot-password.html"));
   });
 
   app.get("/reset-password/:token", (req, res) => {
-    res.sendFile(path.join(__dirname, "./Pages/reset-password.html"));
+    res.sendFile(join(__dirname, "Pages", "reset-password.html"));
   });
 
   app.get("/", (req, res) => {
-    res.sendFile(join(__dirname, "./Pages/index.html"));
+    res.sendFile(join(__dirname, "Pages", "index.html"));
   });
 
   app.use((err, req, res, next) => {
