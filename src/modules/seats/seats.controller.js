@@ -13,7 +13,7 @@ async function GetAllSeats(req, res) {
 }
 
 async function GetSeatByUserId(req, res) {
-  const { user_id } = req.params;
+  const user_id = req.user.user_id;
   try {
     const seat = await db.select().from(Seat).where(eq(Seat.user_id, user_id));
     if (seat.length === 0) {
@@ -26,8 +26,8 @@ async function GetSeatByUserId(req, res) {
 }
 
 async function BookSeat(req, res) {
-  const { user_id, seat_id } = req.body;
-  console.log("Booking seat with user_id:", user_id, "and seat_id:", seat_id);
+  const { seat_id } = req.body;
+  const user_id = req.user.user_id;
   try {
     // const result = await db
     //   .update(Seat)

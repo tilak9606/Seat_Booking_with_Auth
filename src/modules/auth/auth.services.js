@@ -52,7 +52,7 @@ const register = async ({ name, email, password }) => {
       name,
       email,
       password: hashedPassword,
-      emailVerified: true,
+      emailVerified: false,
       verificationToken: rawToken,
     })
     .returning();
@@ -191,7 +191,7 @@ const resetPassword = async (token, newPassword) => {
   if (!user) {
     throw ApiError.badRequest("Invalid or expired token");
   }
-  
+
   const hashedPassword = await bcrypt.hash(newPassword, 10);
 
   await db
