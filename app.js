@@ -20,23 +20,23 @@ export function createApplication() {
   app.use(express.static(join(__dirname, ".")));
 
   app.get("/login.html", (req, res) => {
-    res.sendFile(join(__dirname, "./src/Pages/login.html"));
+    res.sendFile(join(__dirname, "./Pages/login.html"));
   });
 
   app.get("/signup.html", (req, res) => {
-    res.sendFile(join(__dirname, "./src/Pages/signup.html"));
+    res.sendFile(join(__dirname, "./Pages/signup.html"));
   });
 
   app.get("/forgot-password", (req, res) => {
-    res.sendFile(path.join(__dirname, "./src/Pages/forgot-password.html"));
+    res.sendFile(path.join(__dirname, "./Pages/forgot-password.html"));
   });
 
   app.get("/reset-password/:token", (req, res) => {
-    res.sendFile(path.join(__dirname, "./src/Pages/reset-password.html"));
+    res.sendFile(path.join(__dirname, "./Pages/reset-password.html"));
   });
 
   app.get("/", (req, res) => {
-    res.sendFile(join(__dirname, "./src/Pages/index.html"));
+    res.sendFile(join(__dirname, "./Pages/index.html"));
   });
 
   app.use((err, req, res, next) => {
