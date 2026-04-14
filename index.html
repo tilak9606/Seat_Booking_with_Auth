@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stellar Seat Booking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap");
+
+      body {
+        font-family: "Outfit", sans-serif;
+        background-color: #0f172a;
+        color: #f8fafc;
+      }
+    </style>
+  </head>
+
+  <body
+    class="min-h-screen flex items-center justify-evenly p-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
+  >
+    <div id="auth-section" class="flex flex-col gap-4 min-w-max">
+      <!-- Buttons inserted by JS -->
+    </div>
+    <div
+      class="max-w-3xl w-full bg-slate-800/80 backdrop-blur-xl rounded-3xl shadow-2xl p-10 border border-slate-700/50"
+    >
+      <div class="text-center mb-2">
+        <h1
+          class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 tracking-tight"
+        >
+          ChaiCode Cinema - Now Showing<br />
+          <br />
+          <span class="text-red-400">
+            <span class="font-bold">Dhurandhar The Revenge</span>
+          </span>
+        </h1>
+        <p class="text-slate-400 text-base">Jassi ko ghar ki yaad kyu nhi aai?</p>
+      </div>
+
+      <div class="flex justify-center mb-4">
+        <div
+          class="bg-slate-900/50 rounded-full px-6 py-3 border border-slate-700 flex gap-6 items-center"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="w-4 h-4 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.6)]"
+            ></div>
+            <span class="text-slate-300 font-medium text-sm"
+              >Available</span
+            >
+          </div>
+          <div class="w-px h-6 bg-slate-700"></div>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-4 h-4 rounded-full bg-rose-500/20 border-2 border-rose-500/50"
+            ></div>
+            <span class="text-slate-400 font-medium text-sm">Booked</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <div
+          class="bg-slate-900/40 p-4 rounded-2xl border border-slate-700/50 shadow-inner"
+        >
+          <table
+            id="tbl"
+            class="border-separate border-spacing-4 mx-auto"
+          ></table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Auth section management
+      function updateAuthSection() {
+        const token = localStorage.getItem("token");
+        const userStr = localStorage.getItem("user");
+        const authSection = document.getElementById("auth-section");
+
+        if (token && userStr) {
+          const user = JSON.parse(userStr);
+          authSection.innerHTML = `
+                  <a href="/profile.html" class="group relative w-80 flex justify-center py-6 rounded-xl font-semibold text-sm text-white/90 border border-white/10 backdrop-blur-md bg-white/5 shadow-lg transition-all duration-300 ease-out hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(16,185,129,0.3)] active:scale-95 overflow-hidden">
+                    <span class="relative z-10 flex items-center gap-4 text-base">
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                      ${user.name}
+                    </span>
+                  </a>
+                  <button onclick="logout()" class="group relative flex justify-center py-6 rounded-xl font-semibold text-sm text-white/90 border border-white/10 backdrop-blur-md bg-white/5 shadow-lg transition-all duration-300 ease-out hover:bg-rose-500/20 hover:border-rose-500/50 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(244,63,94,0.3)] active:scale-95 overflow-hidden">
+                    <span class="relative z-10 flex items-center gap-4 text-base text-rose-400">
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                      </svg>
+                      Logout
+                    </span>
+                  </button>
+                `;
+        } else {
+          authSection.innerHTML = `
+                  <button onclick="window.location.href='/login.html'" class="group relative px-44 py-6 rounded-xl font-semibold text-sm text-white/90 border border-white/10 backdrop-blur-md bg-white/5 shadow-lg transition-all duration-300 ease-out hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(16,185,129,0.3)] active:scale-95 overflow-hidden">
+                    <span class="relative z-10 flex items-center gap-4 text-xl">
+                      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                      </svg>
+                      Login
+                    </span>
+                  </button>
+                  <button onclick="window.location.href='/signup.html'" class="group relative px-44 py-6 rounded-xl font-semibold text-sm text-white/90 border border-white/10 backdrop-blur-md bg-white/5 shadow-lg transition-all duration-300 ease-out hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(59,130,246,0.3)] active:scale-95 overflow-hidden">
+                    <span class="relative z-10 flex items-center gap-4 text-xl">
+                      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                      </svg>
+                      SignUp
+                    </span>
+                  </button>
+                `;
+        }
+      }
+
+      async function logout() {
+        const token = localStorage.getItem("token");
+        if (token) {
+          try {
+            await fetch("/auth/logout", {
+              method: "POST",
+              headers: { Authorization: `Bearer ${token}` },
+            });
+          } catch (e) {
+            console.error("Logout error:", e);
+          }
+        }
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location.reload();
+      }
+
+      async function run() {
+        const tbl = document.getElementById("tbl");
+        const token = localStorage.getItem("token");
+        const userStr = localStorage.getItem("user");
+        const currentUser = userStr ? JSON.parse(userStr) : null;
+
+        try {
+          const res = await fetch("/seats/");
+          const resarray = await res.json();
+
+          // Sort by seat name (A1, A2... B1, B2...)
+          const j = resarray.sort((a, b) => {
+            const matchA = a.name.match(/^([A-Z])(\d+)$/);
+            const matchB = b.name.match(/^([A-Z])(\d+)$/);
+            if (!matchA || !matchB) return 0;
+            const [_, rowA, numA] = matchA;
+            const [__, rowB, numB] = matchB;
+            if (rowA !== rowB) return rowA.localeCompare(rowB);
+            return parseInt(numA) - parseInt(numB);
+          });
+
+          let tr;
+
+          for (let i = 0; i < j.length; i++) {
+            const seatData = j[i];
+
+            if (i % 8 === 0) {
+              tr = document.createElement("tr");
+              tbl.appendChild(tr);
+            }
+
+            const td = document.createElement("td");
+            const baseClasses =
+              "w-32 h-28 rounded-2xl text-center align-middle text-md font-bold transition-all duration-300 select-none relative group";
+
+            if (seatData.isbooked) {
+              // Check if current user booked this seat
+              const isMySeat =
+                currentUser && seatData.user_id === currentUser.user_id;
+
+              if (isMySeat) {
+                // My booked seat - show cancel option
+                td.className = `${baseClasses} bg-rose-500/20 text-rose-400 border-2 border-rose-500/50 cursor-pointer hover:bg-rose-500/30 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(244,63,94,0.3)] active:scale-95`;
+                td.innerHTML = `
+                        <span class="relative z-10 flex flex-col items-center gap-1">
+                            <span>${seatData.name}</span>
+                            <span class="text-xs font-normal">Click to Cancel</span>
+                        </span>
+                    `;
+
+                // Cancel click handler
+                td.addEventListener("click", async function (e) {
+                  if (!confirm(`Cancel booking for ${seatData.name}?`)) return;
+
+                  try {
+                    const res = await fetch("/seats/cancel", {
+                      method: "PUT",
+                      headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                      },
+                      body: JSON.stringify({
+                        seat_id: seatData.seat_id,
+                        user_id: currentUser.user_id,
+                      }),
+                    });
+
+                    const data = await res.json();
+
+                    if (data.error || res.status !== 200) {
+                      alert(data.error || "Failed to cancel");
+                    } else {
+                      alert("Booking cancelled!");
+                      // Refresh the page to show updated seats
+                      window.location.reload();
+                    }
+                  } catch (ex) {
+                    alert("Error cancelling: " + ex.message);
+                  }
+                });
+              } else {
+                // Someone else's booked seat - no action
+                td.className = `${baseClasses} bg-rose-500/10 text-rose-500/60 border border-rose-500/20 cursor-not-allowed`;
+                td.innerHTML = `
+                        <span class="relative z-10 flex flex-col items-center">
+                            <span>${seatData.name}</span>
+                            <span class="text-xs text-rose-400/60 mt-1">Booked</span>
+                        </span>
+                    `;
+              }
+            } else {
+              td.className = `${baseClasses} bg-emerald-500 text-white border-2 border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.3)] cursor-pointer hover:bg-emerald-400 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(16,185,129,0.5)] active:scale-95`;
+              td.innerHTML = `<span class="relative z-10">${seatData.name}</span>`;
+
+              td.addEventListener("click", async function (e) {
+                const currentTd = e.currentTarget;
+
+                if (!token || !currentUser) {
+                  alert("Please login first!");
+                  window.location.href = "/Login.html";
+                  return;
+                }
+
+                try {
+                  const res = await fetch(`/seats/book`, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                      seat_id: seatData.seat_id,
+                      user_id: currentUser.user_id,
+                    }),
+                  });
+
+                  const data = await res.json();
+
+                  if (data.error) {
+                    alert(data.error);
+                  } else {
+                    alert("Booked successfully!");
+                    currentTd.className = `${baseClasses} bg-rose-500/20 text-rose-400 border-2 border-rose-500/50 cursor-pointer hover:bg-rose-500/30`;
+                    currentTd.innerHTML = `
+                                <span class="relative z-10 flex flex-col items-center gap-1">
+                                    <span>${seatData.name}</span>
+                                    <span class="text-xs font-normal">Click to Cancel</span>
+                                </span>
+                            `;
+                    // Re-attach cancel handler or reload
+                    window.location.reload();
+                  }
+                } catch (ex) {
+                  alert("Error booking: " + ex);
+                }
+              });
+            }
+
+            tr.appendChild(td);
+          }
+        } catch (err) {
+          console.error("Error loading seats:", err);
+          tbl.innerHTML = `<tr><td colspan="8" class="text-rose-400 text-center">Error loading seats</td></tr>`;
+        }
+      }
+      updateAuthSection();
+      run(); 
+    </script>
+  </body>
+</html> 
