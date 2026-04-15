@@ -2,14 +2,16 @@
 
 A secure movie seat booking platform with JWT authentication, email verification, and protected booking endpoints.
 
+**Live Demo:** https://seat-booking-with-auth.onrender.com
+
 ## Tech Stack
 
-Node.js, Express, PostgreSQL, Drizzle ORM, JWT, bcrypt
+Node.js, Express, PostgreSQL, Drizzle ORM, JWT, bcrypt, Nodemailer
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/tilak9606/Seat_Booking_with_Auth.git
+git clone https://github.com/tilak9606/Seat_Booking_with_Auth.git 
 cd Seat_Booking_with_Auth
 npm install
 ```
@@ -18,7 +20,7 @@ Create `.env`:
 
 ```env
 PORT=8080
-CLIENT_URL=http://localhost:8080/
+CLIENT_URL=http://localhost:8080
 FRONTEND_URL=http://localhost:8080
 
 #JWT configuration
@@ -37,11 +39,6 @@ SMTP_FROM_EMAIL=
 
 #PostgreSQL configuration
 DATABASE_URL=
-PGDATABASE=
-PGHOST=
-PGPORT=
-PGUSER=
-PGPASSWORD=
 ```
 
 Start:
@@ -71,4 +68,14 @@ npm run start
 
 ```
 Authorization: Bearer <accessToken>
+```
+If you want registered user 
+
+email:
+```
+chaicode@gmail.com
+```
+pass:
+```
+ChaiCode@123
 ```
