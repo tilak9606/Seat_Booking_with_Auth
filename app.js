@@ -4,7 +4,7 @@ import authRouter from "./src/modules/auth/auth.routes.js";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser";
-import path from "path";
+
 
 export function createApplication() {
   
@@ -17,26 +17,30 @@ export function createApplication() {
   app.use("/seats", seatsRouter);
   app.use("/auth", authRouter);
 
- app.use(express.static(join(__dirname, "Pages")));
+ app.use(express.static(join(__dirname)));
 
   app.get("/login", (req, res) => {
-    res.sendFile(join(__dirname, "Pages", "Login.html"));
+    res.sendFile(join(__dirname, "src/Pages/Login.html"));
   });
 
   app.get("/signup", (req, res) => {
-    res.sendFile(join(__dirname, "Pages", "Signup.html"));
+    res.sendFile(join(__dirname, "src/Pages/Signup.html"));
+  });
+
+  app.get("/me", (req, res) => {
+    res.sendFile(join(__dirname, "src/Pages/Profile.html"));
   });
 
   app.get("/forgot-password", (req, res) => {
-    res.sendFile(join(__dirname, "Pages", "forgot-password.html"));
+    res.sendFile(join(__dirname, "src/Pages/forgot-password.html"));
   });
 
   app.get("/reset-password/:token", (req, res) => {
-    res.sendFile(join(__dirname, "Pages", "reset-password.html"));
+    res.sendFile(join(__dirname, "src/Pages/reset-password.html"));
   });
 
   app.get("/", (req, res) => {
-    res.sendFile(join(__dirname, "Pages", "index.html"));
+    res.sendFile(join(__dirname, "src/Pages/index.html"));
   });
 
   app.use((err, req, res, next) => {

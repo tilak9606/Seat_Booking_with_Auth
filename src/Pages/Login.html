@@ -61,7 +61,7 @@
         <input type="checkbox" class="mr-2 rounded bg-slate-800 border-slate-600" />
         Remember me
     </label>
-    <a href="/forgot-password.html" class="text-sm text-emerald-400 hover:text-emerald-300">
+    <a href="/forgot-password" class="text-sm text-emerald-400 hover:text-emerald-300">
         Forgot password?
     </a>
 </div>
@@ -76,7 +76,7 @@
       <p class="mt-6 text-center text-base text-slate-400">
         Don't have an account?
         <a
-          href="/signup.html"
+          href="/signup"
           class="text-emerald-400 hover:text-emerald-300 font-medium transition-colors"
           >Sign up</a
         >
@@ -115,7 +115,7 @@
               localStorage.setItem("token", data.data.refreshToken);
               localStorage.setItem("user", JSON.stringify(data.data.user));
               alert("Login successful!");
-              window.location.href = "/";
+              window.location.href = "index.html";
             }
           } catch (err) {
             alert("Login failed: " + err);
