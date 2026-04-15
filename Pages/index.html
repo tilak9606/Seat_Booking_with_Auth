@@ -101,7 +101,7 @@
                 `;
         } else {
           authSection.innerHTML = `
-                  <button onclick="window.location.href='src/Pages/Login.html'" class="group relative px-44 py-6 rounded-xl font-semibold text-sm text-white/90 border border-white/10 backdrop-blur-md bg-white/5 shadow-lg transition-all duration-300 ease-out hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(16,185,129,0.3)] active:scale-95 overflow-hidden">
+                  <button onclick="window.location.href='/login'" class="group relative px-44 py-6 rounded-xl font-semibold text-sm text-white/90 border border-white/10 backdrop-blur-md bg-white/5 shadow-lg transition-all duration-300 ease-out hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(16,185,129,0.3)] active:scale-95 overflow-hidden">
                     <span class="relative z-10 flex items-center gap-4 text-xl">
                       <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -109,7 +109,7 @@
                       Login
                     </span>
                   </button>
-                  <button onclick="window.location.href='src/Pages/Signup.html'" class="group relative px-44 py-6 rounded-xl font-semibold text-sm text-white/90 border border-white/10 backdrop-blur-md bg-white/5 shadow-lg transition-all duration-300 ease-out hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(59,130,246,0.3)] active:scale-95 overflow-hidden">
+                  <button onclick="window.location.href='/signup'" class="group relative px-44 py-6 rounded-xl font-semibold text-sm text-white/90 border border-white/10 backdrop-blur-md bg-white/5 shadow-lg transition-all duration-300 ease-out hover:bg-white/10 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(59,130,246,0.3)] active:scale-95 overflow-hidden">
                     <span class="relative z-10 flex items-center gap-4 text-xl">
                       <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
@@ -240,7 +240,7 @@
                 if (!token || !currentUser) {
                   alert("Please login first!");
               
-                  window.location.href = "src/Pages/Login.html";
+                  window.location.href = "/login";
                   return;
                 }
 
@@ -288,7 +288,7 @@
       }
       updateAuthSection();
       run(); 
-       console.log("Navigating to:", window.location.href+ "src/Pages/Signup.html");
+       console.log("Navigating to:", window.location.href+ "Pages/Signup.html");
     </script>
   </body>
 </html> 

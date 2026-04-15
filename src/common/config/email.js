@@ -9,30 +9,38 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const sendEmail = async (to, subject, text) => {
+const sendEmail = async (to, subject, html) => {
   await transporter.sendMail({
-    from: `"${process.env.SMTP_NAME}" <${process.env.SMTP_FROM_EMAIL}>`,
+    from: '"${process.env.SMTP_NAME}" <${process.env.SMTP_FROM_EMAIL}>',
     to,
     subject,
-    text,
+    html, 
   });
 };
 
 const sendVerificationEmail = async (email, token) => {
-  const url = `${process.env.CLIENT_URL}/auth/verifyemail/${token}`;
+  const verificationUrl = `${process.env.CLIENT_URL}/auth/verifyemail/${token}`;
   await sendEmail(
     email,
     "Verify Your Email",
-    `<h2>Welcome!</h2><p>Please click the link below to verify your email address:</p><a href="${url}">Verify Email</a>`,
+    ` <h2>Welcome!</h2>
+      <p>Please click the link below to verify your email address:</p>
+      <a href="${verificationUrl}" style="display:inline-block;padding:10px 20px;background:#007bff;color:#fff;text-decoration:none;border-radius:5px;">Verify Email</a>
+      <p>Or copy and paste this link: ${verificationUrl}</p>
+      <p>This link expires in 15 minutes.</p>`,
   );
 };
 
 const sendResetPasswordEmail = async (email, token) => {
-  const url = `${process.env.FRONTEND_URL}/reset-password/${token}`;
+  const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${token}`;
   await sendEmail(
     email,
     "Reset Your Password",
-    `<h2>Password Reset Request</h2><p>Please click the link below to reset your password:</p><a href="${url}">Reset Password link expires in 15 minutes.</a>`,
+    `<h2>Password Reset Request</h2>
+      <p>Please click the link below to reset your password:</p>
+      <a href="${resetUrl}" style="display:inline-block;padding:10px 20px;background:#28a745;color:#fff;text-decoration:none;border-radius:5px;">Reset Password</a>
+      <p>Or copy and paste this link: ${resetUrl}</p>
+      <p>This link expires in 15 minutes.</p>`,
   );
 };
 
